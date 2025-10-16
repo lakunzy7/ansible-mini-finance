@@ -1,0 +1,77 @@
+---
+# Play 1: System setup
+- name: Prepare System
+  hosts: web
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+# Play 2: Deploy application
+- name: Deploy Mini Finance
+  hosts: web
+  become: true
+  tasks:
+    - name: Remove default nginx page
+      file:
+        path: /var/www/html/index.nginx-debian.html
+        state: absent
+
+    - name: Copy Mini Finance application
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      notify: Restart nginx
+
+  handlers:
+    - name: Restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+
+# Play 3: Verification
+- name: Verify Deployment
+  hosts: web
+  tasks:
+    - name: Wait for nginx
+      wait_for:
+        port: 80
+        delay: 2
+
+    - name: Test HTTP response
+      uri:
+        url: http://localhost
+        status_code: 200
+        return_content: yes
+      register: http_result
+
+    - name: Verify Mini Finance content
+      fail:
+        msg: "Mini Finance app not deployed correctly"
+      when: "'Mini Finance' not in http_result.content"
+
+    - name: Show success message
+      debug:
+        msg:
+          - "=========================================="
+          - "✅ Mini Finance Deployed Successfully!"
+          - "=========================================="
+          - "🌐 Access URL: http://{{ ansible_host }}"
+          - "📊 HTTP Status: {{ http_result.status }}"
+          - "=========================================="

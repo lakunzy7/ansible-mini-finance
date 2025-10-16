@@ -1,0 +1,31 @@
+# Ansible
+*.retry
+.ansible/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# SSH keys and secrets
+*.pem
+*.key
+id_*
+*.pub
+
+# Inventory with IPs
+inventory.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
