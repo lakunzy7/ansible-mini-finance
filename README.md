@@ -76,7 +76,6 @@ ansible-mini-finance/
 │   └── site.yml
 ├── git/
 │   ├── LICENSE
-│   └── README.md
 └── terraform/
     ├── main.tf
     ├── outputs.tf
