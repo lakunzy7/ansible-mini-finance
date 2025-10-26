@@ -10,7 +10,7 @@ A beautiful, responsive personal finance dashboard deployed with **Ansible** on 
 ![Ansible](https://img.shields.io/badge/Ansible-2.16-red)
 ![Azure](https://img.shields.io/badge/Platform-Azure-blue)
 ![Terraform](https://img.shields.io/badge/Terraform-1.0-green)
-![CI/CD](https://img.shields.io/github/actions/workflow/status/<your_github_username>/ansible-mini-finance/deploy.yml?branch=main)
+![CI/CD](https://img.shields.io/github/actions/workflow/status/lakunzy7/ansible-mini-finance/deploy.yml?branch=main)
 
 ---
 
@@ -165,7 +165,7 @@ Modify the dashboard values and transaction table in `files/index.html`
 
 * **VM Size**: Standard_B2s (2 vCPU, 4GB RAM)
 * **Storage**: 30GB Standard SSD
-* **Region**: North Europe
+* **Region**: East US
 * **Cost**: ~€0.02/hour
 
 ---
@@ -175,11 +175,8 @@ Modify the dashboard values and transaction table in `files/index.html`
 * ✅ Terraform VM provisioning and NSG rules
 * ✅ Ansible playbook design patterns
 * ✅ File deployment with `copy` module
-* ✅ Service management with `systemd`
-* ✅ Handlers for automatic restarts
 * ✅ Idempotent configuration management
 * ✅ URI module for health checks
-* ✅ GitHub Actions for CI/CD
 
 ---
 
@@ -202,11 +199,22 @@ MIT License – Free to use for learning and personal projects
 
 ## 🙏 Acknowledgments
 
-Built as part of **Azure + Ansible DevOps learning journey**.
+Built as part of **DMI DevOps learning journey**.
+
+## 📚 Resources
+
+* [Terraform Azure Provider Documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
+* [Azure Virtual Network Overview](https://learn.microsoft.com/en-us/azure/virtual-network/)
+* [Ansible Ad-Hoc Commands](https://docs.ansible.com/ansible/latest/cli/ansible.html)
 
 ---
 
-**⭐ If this helped you, please star the repo!**
-📞 **Questions?** Open an issue or reach out on GitHub.
+*Author:* Owofola Olakunle (Lakunzy)
 
----
+*Project Type:* DevOps Infrastructure Automation
+
+*Platform:* Microsoft Azure (Free Tier)
+
+*Date:* October 2025
+
+*Channel:* [CyberLab Chronicles on YouTube](https://www.youtube.com/@CyberLabChronicles)
