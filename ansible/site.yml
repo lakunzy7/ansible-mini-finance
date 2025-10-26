@@ -1,0 +1,80 @@
+---
+# Play 1: Install and configure Nginx
+- name: Install and configure Nginx
+  hosts: web
+  become: true
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+
+    - name: Ensure Nginx is started and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+# Play 2: Deploy Mini Finance static site
+- name: Deploy Mini Finance application
+  hosts: web
+  become: true
+  tasks:
+    - name: Remove all existing files in /var/www/html
+      ansible.builtin.file:
+        path: /var/www/html
+        state: absent
+
+    - name: Recreate /var/www/html directory
+      ansible.builtin.file:
+        path: /var/www/html
+        state: directory
+        mode: '0755'
+
+    - name: Clone Mini Finance repository
+      ansible.builtin.git:
+        repo: https://github.com/lakunzy7/mini-finance-app.git
+        dest: /var/www/html
+        version: main
+        force: true
+
+    - name: Move static files to root of /var/www/html
+      ansible.builtin.command:
+        cmd: mv /var/www/html/2135_mini_finance/* /var/www/html/
+      args:
+        removes: /var/www/html/2135_mini_finance
+
+    - name: Set permissions for Nginx
+      ansible.builtin.file:
+        path: /var/www/html
+        recurse: true
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+# Play 3: Verification
+- name: Verify site deployment
+  hosts: web
+  tasks:
+    - name: Show homepage preview
+      ansible.builtin.uri:
+        url: http://{{ inventory_hostname }}
+        return_content: true
+      register: homepage_preview
+      changed_when: false
+
+    - name: Display homepage content preview
+      ansible.builtin.debug:
+        var: homepage_preview.content
+
+    - name: Check homepage availability
+      ansible.builtin.uri:
+        url: http://{{ inventory_hostname }}
+        status_code: 200
+      register: homepage_status
+      changed_when: false
+
+    - name: Display homepage availability status
+      ansible.builtin.debug:
+        msg: "Homepage is available: {{ homepage_status.status == 200 }}"
