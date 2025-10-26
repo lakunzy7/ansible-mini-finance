@@ -1,0 +1,47 @@
+# -----------------------
+# Ansible
+# -----------------------
+*.retry
+.ansible/
+__pycache__/
+
+# -----------------------
+# Terraform
+# -----------------------
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars    # avoid committing secrets/credentials
+
+# -----------------------
+# SSH keys and secrets
+# -----------------------
+*.pem
+*.key
+id_*
+*.pub
+
+# -----------------------
+# Inventory with IPs
+# -----------------------
+inventory.ini
+
+# -----------------------
+# IDE / Editor
+# -----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -----------------------
+# OS files
+# -----------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------
+# Logs
+# -----------------------
+*.log
