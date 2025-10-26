@@ -9,7 +9,7 @@ A beautiful, responsive personal finance dashboard deployed with **Ansible** on 
 ![Status](https://img.shields.io/badge/Status-Production_Ready-success)
 ![Ansible](https://img.shields.io/badge/Ansible-2.16-red)
 ![Azure](https://img.shields.io/badge/Platform-Azure-blue)
-![Terraform](https://img.shields.io/badge/Terraform-4.0-green)
+![Terraform](https://img.shields.io/badge/Terraform-1.13.4-green)
 ![CI/CD](https://img.shields.io/github/actions/workflow/status/lakunzy7/ansible-mini-finance/deploy.yml?branch=main)
 
 ---
